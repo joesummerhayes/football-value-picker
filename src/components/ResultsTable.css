@@ -1,0 +1,4 @@
+.fixture-row:hover {
+    background-color: palegreen;
+    cursor: pointer;
+}
