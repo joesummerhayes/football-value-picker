@@ -38,14 +38,26 @@ class FixtureTable extends Component {
                         const drawOdds = (100/drawProb).toFixed(2);
                         const awayOdds = (100/awayProb).toFixed(2);
 
-                        const bookieOddsGame = oddsArray.find(game => {
+                        const gameInfo = oddsArray.find(game => {
                              return game.home_team.includes(item.match_hometeam_name);
                         });
-                        const bookieOdds = bookieOddsGame
-                            ? bookieOddsGame.sites[0].odds.h2h
+                        console.log(gameInfo)
+
+
+                        const bookieOdds = gameInfo
+                            ? gameInfo.sites.find(bookmaker => bookmaker.site_key === 'betfair').odds.h2h
                             : [];
 
-                        console.log(bookieOdds)
+
+                        // order of the odds varies based on the teams alphbetical order. So ensure they are always the same.
+                            if (gameInfo) {
+                                if (gameInfo.home_team === gameInfo.teams[0]) {
+                                    const temp = bookieOdds[1];
+                                    bookieOdds[1] = bookieOdds[0];
+                                    bookieOdds[0] = temp;
+                                }
+                            }
+                            
 
                         return (
                             <tr className="fixture-row">
