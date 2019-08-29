@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import './FixtureTable.css';
+import {findOddsValue} from './fixtureTableHelpers';
 
 class FixtureTable extends Component {
 
@@ -14,16 +16,15 @@ class FixtureTable extends Component {
                     <tr>
                         <th>Fixture</th>
                         <th>Home</th>
-                        <th>X</th>
+                        <th>Draw</th>
                         <th>Away</th>
-                        <th>Bookie home</th>
-                        <th>Bookie draw</th>
-                        <th>Bookie away</th>
+                        <th>Betfair home</th>
+                        <th>Betfair draw</th>
+                        <th>Betfair away</th>
                     </tr>
                 </thead>
                 <tbody>
                     {fixturesArray.map(item => {
-                        //To convert from a probability to odds, divide the probability by one minus that probability
                         const homeProbRaw = parseInt(item.prob_HW);
                         const awayProbRaw =  parseInt(item.prob_AW);
                         const drawProbRaw = parseInt(item.prob_D);
@@ -57,17 +58,27 @@ class FixtureTable extends Component {
                                     bookieOdds[0] = temp;
                                 }
                             }
-                            
+                        // define bookie odds
+                        const homeBookieOdds = bookieOdds[1];
+                        const drawBookieOdds = bookieOdds[2];
+                        const awayBookieOdds = bookieOdds[0];
 
+                        // find difference between myOdds and bookieOdds
+                        const oddsDiff = {
+                            home: (homeBookieOdds - homeOdds).toFixed(2),
+                            draw: (drawBookieOdds - drawOdds).toFixed(2),
+                            away: (awayBookieOdds - awayOdds).toFixed(2)
+                        }
+                            
                         return (
                             <tr className="fixture-row">
                                 <td data-label="Fixture">{`${item.match_hometeam_name} vs ${item.match_awayteam_name}`}</td>
                                 <td data-label="home-chance">{homeOdds}</td>
                                 <td data-label="draw-chance">{drawOdds}</td>
                                 <td data-label="away-chance">{awayOdds}</td>
-                                <td data-label="bookie-odds-home">{bookieOdds[1]}</td>
-                                <td data-label="bookie-odds-draw">{bookieOdds[2]}</td>
-                                <td data-label="bookie-odds-away">{bookieOdds[0]}</td>
+                                <td class={findOddsValue('home', oddsDiff)} data-label="bookie-odds-home">{homeBookieOdds} <br/> ({oddsDiff.home})</td>
+                                <td class={findOddsValue('draw', oddsDiff)} data-label="bookie-odds-draw">{drawBookieOdds} <br/> ({oddsDiff.draw})</td>
+                                <td class={findOddsValue('away', oddsDiff)} data-label="bookie-odds-away">{awayBookieOdds} <br/> ({oddsDiff.away})</td>
                             </tr>
                         )
                     })}
