@@ -8,3 +8,13 @@ export function findOddsValue(result, oddsDiff) {
          return oddsDiff.away > 2 ? "oddsSuperValue" : oddsDiff.away > 1 ? "oddsHighValue" : oddsDiff.away > 0 ? "oddsValue" : ''
      }
 }
+
+export function findProfit(result, oddsDiff, moneyWin) {
+    if (result === 'home') {
+        return oddsDiff.home > 0 ? `£${moneyWin.home}` : ''
+    } else if (result === 'draw') {
+        return oddsDiff.draw > 0 ? `£${moneyWin.draw}` : ''
+    } else if (result === 'away') {
+        return oddsDiff.away > 0 ? `£${moneyWin.away}`: ''
+    }
+} 
