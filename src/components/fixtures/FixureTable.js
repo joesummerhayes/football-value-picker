@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './FixtureTable.css';
-import {findOddsValue} from './fixtureTableHelpers';
+import {findOddsValue, findProfit} from './fixtureTableHelpers';
+
 
 class FixtureTable extends Component {
 
@@ -11,13 +12,15 @@ class FixtureTable extends Component {
 
 
         return (
-            <table className="ui celled table">
+            <div>
+            <table className="ui celled table" id="table-to-xls">
                 <thead>
                     <tr>
                         <th>Fixture</th>
                         <th>Home</th>
                         <th>Draw</th>
                         <th>Away</th>
+                        <th>*</th>
                         <th>Betfair home</th>
                         <th>Betfair draw</th>
                         <th>Betfair away</th>
@@ -69,6 +72,13 @@ class FixtureTable extends Component {
                             draw: (drawBookieOdds - drawOdds).toFixed(2),
                             away: (awayBookieOdds - awayOdds).toFixed(2)
                         }
+
+                        const moneyWin = {
+                            home: ((homeBookieOdds * 10) - 10).toFixed(2),
+                            draw: ((drawBookieOdds * 10) -10).toFixed(2),
+                            away: ((awayBookieOdds * 10) -10).toFixed(2)
+                        }
+
                             
                         return (
                             <tr className="fixture-row">
@@ -76,14 +86,22 @@ class FixtureTable extends Component {
                                 <td data-label="home-chance">{homeOdds}</td>
                                 <td data-label="draw-chance">{drawOdds}</td>
                                 <td data-label="away-chance">{awayOdds}</td>
-                                <td class={findOddsValue('home', oddsDiff)} data-label="bookie-odds-home">{homeBookieOdds} <br/> ({oddsDiff.home})</td>
-                                <td class={findOddsValue('draw', oddsDiff)} data-label="bookie-odds-draw">{drawBookieOdds} <br/> ({oddsDiff.draw})</td>
-                                <td class={findOddsValue('away', oddsDiff)} data-label="bookie-odds-away">{awayBookieOdds} <br/> ({oddsDiff.away})</td>
+                                <td data-label="betting-info">Odds <br/> Diff <br/> Profit</td>
+                                <td class={findOddsValue('home', oddsDiff)} data-label="bookie-odds-home">
+                                    {homeBookieOdds} <br/> ({oddsDiff.home}) <br/> {findProfit('home', oddsDiff, moneyWin)}
+                                </td>
+                                <td class={findOddsValue('draw', oddsDiff)} data-label="bookie-odds-draw">
+                                    {drawBookieOdds} <br/> ({oddsDiff.draw}) <br/> {findProfit('draw', oddsDiff, moneyWin)}
+                                </td>
+                                <td class={findOddsValue('away', oddsDiff)} data-label="bookie-odds-away">
+                                    {awayBookieOdds} <br/> ({oddsDiff.away}) <br/> {findProfit('away', oddsDiff, moneyWin)}
+                                </td>
                             </tr>
                         )
                     })}
                 </tbody>
             </table>
+            </div>
         )
     };
 
