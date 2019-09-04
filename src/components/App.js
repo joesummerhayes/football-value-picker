@@ -1,18 +1,23 @@
 import React from 'react';
-import Stats from './Stats';
-import Odds from './Odds';
-import Results from './Results';
+import { BrowserRouter, Route, Switch} from 'react-router-dom';
+
 import Fixtures from './fixtures/Fixtures';
+import Nav from './navbar/Nav';
+
+
+
 
 class App extends React.Component {
     render() {
         return (
-            <div>
-                This is my app
-                <div>
-                    <Fixtures />
-                </div>
-            </div>
+            <>
+                <BrowserRouter>
+                    <Nav />
+                    <Switch>
+                        <Route path="/" exact component={Fixtures} />
+                    </Switch>
+                </BrowserRouter>
+            </>
         )
     }
 }
