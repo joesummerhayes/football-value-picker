@@ -1,0 +1,7 @@
+.nav-center{
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    max-width: 1170px;
+    margin: 10px auto;
+}

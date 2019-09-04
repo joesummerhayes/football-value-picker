@@ -8,7 +8,7 @@ class FixtureTable extends Component {
     renderFixtures = () => {
         const fixturesArray = this.props.fixturesArray;
         const oddsArray = this.props.oddsArray;
-        console.log(oddsArray)
+        console.log(fixturesArray)
 
 
         return (
@@ -49,8 +49,10 @@ class FixtureTable extends Component {
 
 
                         const bookieOdds = gameInfo
-                            ? gameInfo.sites.find(bookmaker => bookmaker.site_key === 'betfair').odds.h2h
+                            ? gameInfo.sites.find(bookmaker => bookmaker.site_key === 'betfair' || 'skybet').odds.h2h
                             : [];
+
+                        //this line needs looking at to handle the case where i can't get betfair odds.
 
 
                         // order of the odds varies based on the teams alphbetical order. So ensure they are always the same.
@@ -70,7 +72,7 @@ class FixtureTable extends Component {
                         const oddsDiff = {
                             home: (homeBookieOdds - homeOdds).toFixed(2),
                             draw: (drawBookieOdds - drawOdds).toFixed(2),
-                            away: (awayBookieOdds - awayOdds).toFixed(2)
+                            away: (awayBookieOdds - awayOdds).toFixed(2),
                         }
 
                         const moneyWin = {
@@ -78,14 +80,13 @@ class FixtureTable extends Component {
                             draw: ((drawBookieOdds * 10) -10).toFixed(2),
                             away: ((awayBookieOdds * 10) -10).toFixed(2)
                         }
-
                             
                         return (
                             <tr className="fixture-row">
-                                <td data-label="Fixture">{`${item.match_hometeam_name} vs ${item.match_awayteam_name}`}</td>
-                                <td data-label="home-chance">{homeOdds}</td>
-                                <td data-label="draw-chance">{drawOdds}</td>
-                                <td data-label="away-chance">{awayOdds}</td>
+                                <td data-label="Fixture">{`${item.match_hometeam_name || 'no team'} vs ${item.match_awayteam_name || 'no team'}`}</td>
+                                <td data-label="home-chance">{homeOdds || '/'}</td>
+                                <td data-label="draw-chance">{drawOdds || '/'}</td>
+                                <td data-label="away-chance">{awayOdds || '/'}</td>
                                 <td data-label="betting-info">Odds <br/> Diff <br/> Profit</td>
                                 <td class={findOddsValue('home', oddsDiff)} data-label="bookie-odds-home">
                                     {homeBookieOdds} <br/> ({oddsDiff.home}) <br/> {findProfit('home', oddsDiff, moneyWin)}
@@ -107,7 +108,7 @@ class FixtureTable extends Component {
 
     render() {
         return (
-            <div>{this.renderFixtures()}</div>
+            <div>{this.props.fixturesArray.error !== 404 ? this.renderFixtures() : 'no content until a week before match day'}</div>
         )
     }
 }
