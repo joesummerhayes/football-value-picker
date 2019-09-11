@@ -7,7 +7,7 @@ export function findOddsValue(result, oddsDiff) {
      } else if (result === 'away') {
          return oddsDiff.away > 2 ? "oddsSuperValue" : oddsDiff.away > 1 ? "oddsHighValue" : oddsDiff.away > 0.2 ? "oddsValue" : ''
      }
-}
+};
 
 export function findProfit(result, oddsDiff, moneyWin) {
     if (result === 'home') {
@@ -17,4 +17,4 @@ export function findProfit(result, oddsDiff, moneyWin) {
     } else if (result === 'away') {
         return oddsDiff.away > 0 ? `£${moneyWin.away}`: ''
     }
-}
+};

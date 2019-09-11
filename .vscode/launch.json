@@ -7,8 +7,14 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}/start"
+            "name": "build",
+            "program": "${workspaceFolder}/node_modules/.bin/webpack-cli",
+            "args": [
+              "--config",
+              "webpack.config.prod.js"
+            ],
+            "autoAttachChildProcesses": true,
+            "stopOnEntry": true
         }
     ]
 }
