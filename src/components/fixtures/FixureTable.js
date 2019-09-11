@@ -24,6 +24,7 @@ class FixtureTable extends Component {
             const oldTeamArray = Array(this.state.oddsHomeDiff, this.state.oddsDrawDiff, this.state.oddsAwayDiff).sort((a, b) => a - b);
 
             if (newTeamArray[2] && newTeamArray[2] > oldTeamArray[2]) {
+                console.log('HIT', match, 'beat', this.state)
                 this.setState({
                     homeTeam: match.homeTeamName,
                     awayTeam: match.awayTeamName,
@@ -140,7 +141,7 @@ class FixtureTable extends Component {
                             return ''
                         } else {
 
-                        getDreamersBet(teamObject, this.state);
+                        getDreamersBet(teamObject);
 
                         return (
                             <tr className="fixture-row">

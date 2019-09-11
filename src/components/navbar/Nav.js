@@ -5,11 +5,27 @@ import './nav.css'
 class Nav extends React.Component {
     render() {
         return (
-            <div className="nav-center">
-                <Link to="/">Premiership</Link>
-                <Link to="/championship">Championship</Link>
-                <Link to="/one">league 1</Link>
-                <Link to="/two">League 2</Link>
+            <div className="ui four item menu">
+                <div className="item">
+                    <Link to="/">
+                        <div className="nav-division">Premiership</div>
+                    </Link>
+                </div>
+                <div className="item">
+                    <Link to="/championship">
+                        <div className="nav-division">Championship</div>
+                    </Link>
+                </div>
+                <div className="item">
+                    <Link to="/one">
+                        <div className="nav-division">league 1</div>
+                    </Link>
+                </div>
+                <div className="item">
+                    <Link to="/two">
+                        <div className="nav-division">League 2</div>
+                    </Link>
+                </div>
             </div>
         )
     }
