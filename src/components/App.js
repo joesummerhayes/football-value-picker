@@ -1,8 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch} from 'react-router-dom';
 
-import Fixtures from './fixtures/Fixtures';
+import PremData from './PremData';
 import Nav from './navbar/Nav';
+import LeagueOneData from './LeagueOneData';
+import LeagueTwoData from './LeagueTwoData';
+import ChampionshipData from './ChampionshipData';
 
 
 
@@ -14,7 +17,10 @@ class App extends React.Component {
                 <BrowserRouter>
                     <Nav />
                     <Switch>
-                        <Route path="/" exact component={Fixtures} />
+                        <Route path="/" exact component={PremData} />
+                        <Route path="/championship" exact component={ChampionshipData} />
+                        <Route path="/one" exact component={LeagueOneData} />
+                        <Route path="/two" exact component={LeagueTwoData} />
                     </Switch>
                 </BrowserRouter>
             </>

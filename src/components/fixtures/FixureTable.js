@@ -1,15 +1,42 @@
 import React, { Component } from 'react';
 import './FixtureTable.css';
 import {findOddsValue, findProfit} from './fixtureTableHelpers';
-
+import DreamersSelection from '../DreamersSelection';
 
 class FixtureTable extends Component {
+    state={
+        homeTeam: '',
+        awayTeam: '',
+        oddsHome: 0,
+        oddsDraw: 0,
+        oddsAway: 0,
+        oddsHomeDiff: 0,
+        oddsDrawDiff: 0,
+        oddsAwayDiff: 0,
+    };
 
     renderFixtures = () => {
         const fixturesArray = this.props.fixturesArray;
         const oddsArray = this.props.oddsArray;
-        console.log(fixturesArray)
 
+        const getDreamersBet = (match) => {
+            const newTeamArray = Array(match.oddsHomeDiff, match.oddsDrawDiff, match.oddsAwayDiff).sort((a, b) => a - b);
+            const oldTeamArray = Array(this.state.oddsHomeDiff, this.state.oddsDrawDiff, this.state.oddsAwayDiff).sort((a, b) => a - b);
+
+            if (newTeamArray[2] && newTeamArray[2] > oldTeamArray[2]) {
+                this.setState({
+                    homeTeam: match.homeTeamName,
+                    awayTeam: match.awayTeamName,
+                    oddsHome: match.oddsHome,
+                    oddsDraw: match.oddsDraw,
+                    oddsAway: match.oddsAway,
+                    oddsHomeDiff: match.oddsHomeDiff,
+                    oddsDrawDiff: match.oddsDrawDiff,
+                    oddsAwayDiff: match.oddsAwayDiff,
+                })
+            };
+
+        };
 
         return (
             <div>
@@ -27,12 +54,11 @@ class FixtureTable extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {fixturesArray.map(item => {
+                {fixturesArray.map(item => {
                         const homeProbRaw = parseInt(item.prob_HW);
                         const awayProbRaw =  parseInt(item.prob_AW);
                         const drawProbRaw = parseInt(item.prob_D);
                         const probTotal = homeProbRaw + drawProbRaw + awayProbRaw;
-
 
                         const homeProb = homeProbRaw/probTotal * 100;
                         const drawProb = drawProbRaw/probTotal * 100;
@@ -43,44 +69,79 @@ class FixtureTable extends Component {
                         const awayOdds = (100/awayProb).toFixed(2);
 
                         const gameInfo = oddsArray.find(game => {
-                             return game.home_team.includes(item.match_hometeam_name);
+
+                        if (game.home_team.includes(item.match_hometeam_name)) {
+                            return game
+                        } if (game.home_team.includes(item.match_hometeam_name.substring(0,3))) {
+                            return game
+                        };
+
                         });
-                        console.log(gameInfo)
-
-
+                      
                         const bookieOdds = gameInfo
                             ? gameInfo.sites.find(bookmaker => bookmaker.site_key === 'betfair' || 'skybet').odds.h2h
                             : [];
 
-                        //this line needs looking at to handle the case where i can't get betfair odds.
+                        let homeName = '';
+                        let awayName = '';
+                        let homeBookieOdds = '';
+                        let drawBookieOdds = '';
+                        let awayBookieOdds = '';
 
+                        if (gameInfo) {
+                            const teamsArray = gameInfo.teams;
+                            teamsArray.map((team) => {
+                                return team === gameInfo.home_team ? homeName = team : awayName = team; 
+                            });
 
-                        // order of the odds varies based on the teams alphbetical order. So ensure they are always the same.
-                            if (gameInfo) {
-                                if (gameInfo.home_team === gameInfo.teams[0]) {
-                                    const temp = bookieOdds[1];
-                                    bookieOdds[1] = bookieOdds[0];
-                                    bookieOdds[0] = temp;
-                                }
+                        };
+
+                        const sortTeamsAlph = (homeTeam, awayTeam) => {
+                            const homeSplit = homeTeam.trim().split();
+                            const awaySplit = awayTeam.trim().split();
+                            
+                            if (homeSplit[0] < awaySplit[0]) {
+                                homeBookieOdds = bookieOdds[0];
+                                awayBookieOdds = bookieOdds[1];
+                                drawBookieOdds = bookieOdds[2];
+                            } else {
+                                homeBookieOdds = bookieOdds[1];
+                                awayBookieOdds = bookieOdds[0];
+                                drawBookieOdds = bookieOdds[2];
                             }
-                        // define bookie odds
-                        const homeBookieOdds = bookieOdds[1];
-                        const drawBookieOdds = bookieOdds[2];
-                        const awayBookieOdds = bookieOdds[0];
+                        }
 
-                        // find difference between myOdds and bookieOdds
+                        sortTeamsAlph(homeName, awayName)
+
+
                         const oddsDiff = {
                             home: (homeBookieOdds - homeOdds).toFixed(2),
                             draw: (drawBookieOdds - drawOdds).toFixed(2),
                             away: (awayBookieOdds - awayOdds).toFixed(2),
-                        }
+                        };
+
+                        const teamObject = {
+                            homeTeamName: gameInfo ? homeName : '',
+                            awayTeamName: gameInfo ? awayName : '',
+                            oddsHome: homeBookieOdds ? homeBookieOdds: '',
+                            oddsDraw: drawBookieOdds,
+                            oddsAway: awayBookieOdds,
+                            oddsHomeDiff: oddsDiff.home,
+                            oddsDrawDiff: oddsDiff.draw,
+                            oddsAwayDiff: oddsDiff.away,
+                        };
 
                         const moneyWin = {
                             home: ((homeBookieOdds * 10) - 10).toFixed(2),
                             draw: ((drawBookieOdds * 10) -10).toFixed(2),
                             away: ((awayBookieOdds * 10) -10).toFixed(2)
                         }
-                            
+                        if (!homeBookieOdds || homeOdds & awayOdds & drawOdds === '3.00') {
+                            return ''
+                        } else {
+
+                        getDreamersBet(teamObject, this.state);
+
                         return (
                             <tr className="fixture-row">
                                 <td data-label="Fixture">{`${item.match_hometeam_name || 'no team'} vs ${item.match_awayteam_name || 'no team'}`}</td>
@@ -88,17 +149,18 @@ class FixtureTable extends Component {
                                 <td data-label="draw-chance">{drawOdds || '/'}</td>
                                 <td data-label="away-chance">{awayOdds || '/'}</td>
                                 <td data-label="betting-info">Odds <br/> Diff <br/> Profit</td>
-                                <td class={findOddsValue('home', oddsDiff)} data-label="bookie-odds-home">
+                                <td className={findOddsValue('home', oddsDiff)} data-label="bookie-odds-home">
                                     {homeBookieOdds} <br/> ({oddsDiff.home}) <br/> {findProfit('home', oddsDiff, moneyWin)}
                                 </td>
-                                <td class={findOddsValue('draw', oddsDiff)} data-label="bookie-odds-draw">
+                                <td className={findOddsValue('draw', oddsDiff)} data-label="bookie-odds-draw">
                                     {drawBookieOdds} <br/> ({oddsDiff.draw}) <br/> {findProfit('draw', oddsDiff, moneyWin)}
                                 </td>
-                                <td class={findOddsValue('away', oddsDiff)} data-label="bookie-odds-away">
+                                <td className={findOddsValue('away', oddsDiff)} data-label="bookie-odds-away">
                                     {awayBookieOdds} <br/> ({oddsDiff.away}) <br/> {findProfit('away', oddsDiff, moneyWin)}
                                 </td>
                             </tr>
                         )
+                        };
                     })}
                 </tbody>
             </table>
@@ -108,7 +170,10 @@ class FixtureTable extends Component {
 
     render() {
         return (
-            <div>{this.props.fixturesArray.error !== 404 ? this.renderFixtures() : 'no content until a week before match day'}</div>
+            <div>
+                <DreamersSelection selection = {this.state} />
+                {this.props.fixturesArray.error !== 404 ? this.renderFixtures() : 'no content until a week before match day'}
+            </div>
         )
     }
 }
