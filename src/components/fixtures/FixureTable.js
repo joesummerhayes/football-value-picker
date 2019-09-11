@@ -24,7 +24,6 @@ class FixtureTable extends Component {
             const oldTeamArray = Array(this.state.oddsHomeDiff, this.state.oddsDrawDiff, this.state.oddsAwayDiff).sort((a, b) => a - b);
 
             if (newTeamArray[2] && newTeamArray[2] > oldTeamArray[2]) {
-                console.log('HIT', match, 'beat', this.state)
                 this.setState({
                     homeTeam: match.homeTeamName,
                     awayTeam: match.awayTeamName,
@@ -73,10 +72,9 @@ class FixtureTable extends Component {
 
                         if (game.home_team.includes(item.match_hometeam_name)) {
                             return game
-                        } if (game.home_team.includes(item.match_hometeam_name.substring(0,3))) {
+                        } if (game.home_team.includes(item.match_hometeam_name.substring(0,4))) {
                             return game
-                        };
-
+                        }
                         });
                       
                         const bookieOdds = gameInfo
@@ -124,12 +122,12 @@ class FixtureTable extends Component {
                         const teamObject = {
                             homeTeamName: gameInfo ? homeName : '',
                             awayTeamName: gameInfo ? awayName : '',
-                            oddsHome: homeBookieOdds ? homeBookieOdds: '',
+                            oddsHome: homeBookieOdds,
                             oddsDraw: drawBookieOdds,
                             oddsAway: awayBookieOdds,
-                            oddsHomeDiff: oddsDiff.home,
-                            oddsDrawDiff: oddsDiff.draw,
-                            oddsAwayDiff: oddsDiff.away,
+                            oddsHomeDiff: parseFloat(oddsDiff.home),
+                            oddsDrawDiff: parseFloat(oddsDiff.draw),
+                            oddsAwayDiff: parseFloat(oddsDiff.away),
                         };
 
                         const moneyWin = {
