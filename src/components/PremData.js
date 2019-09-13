@@ -24,7 +24,12 @@ class PremData extends React.Component {
 
         Request.get(fixtureRequest).then((response) =>{
             const fixtureArray = response.body;
-            console.log(fixtureArray)
+
+        //make sure fixture array is matchweek fixtures only
+            const spliceFrom = 10;
+            const spliceTo = fixtureArray.length;
+            fixtureArray.splice(spliceFrom, spliceTo);
+
             this.setState({
                 fixtures: fixtureArray
             });
@@ -32,12 +37,12 @@ class PremData extends React.Component {
 
         const oddsApiKey = '2c6b7d182fa278280c13e5e5a562ea1a';
         const oddsApiKey2 = 'e89aafa4faef377c025d330a58c46bc9';
-        const oddsRequest = `https://api.the-odds-api.com/v3/odds/?apiKey=${oddsApiKey}&sport=soccer_epl&region=uk&mkt=h2h`;
-        const oddsRequestPrem = `https://api.the-odds-api.com/v3/odds/?apiKey=${oddsApiKey}&sport=soccer_epl&region=uk&mkt=h2h`;
+        const oddsRequest = `https://api.the-odds-api.com/v3/odds/?apiKey=${oddsApiKey2}&sport=soccer_epl&region=uk&mkt=h2h`;
+        const oddsRequestPrem = `https://api.the-odds-api.com/v3/odds/?apiKey=${oddsApiKey2}&sport=soccer_epl&region=uk&mkt=h2h`;
         
         Request.get(oddsRequestPrem).then((response) => {
             const oddsArray = response.body;
-            console.log(oddsArray)
+
             this.setState({
                 odds: oddsArray.data
             });
