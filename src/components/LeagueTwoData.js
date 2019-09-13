@@ -25,7 +25,12 @@ class LeagueTwoData extends React.Component {
 
         Request.get(leagueTwoFixtureRequest).then((response) =>{
             const fixtureArray = response.body;
-            console.log(fixtureArray)
+            
+            //make sure array is gameweekfixtures ONLY
+            const spliceFrom = 12;
+            const spliceTo = fixtureArray.length;
+            fixtureArray.splice(spliceFrom, spliceTo);
+
             this.setState({
                 fixtures: fixtureArray
             });
@@ -34,7 +39,7 @@ class LeagueTwoData extends React.Component {
         const oddsApiKey = '2c6b7d182fa278280c13e5e5a562ea1a';
         const oddsApiKey2 = 'e89aafa4faef377c025d330a58c46bc9';
         const oddsRequest = `https://api.the-odds-api.com/v3/odds/?apiKey=${oddsApiKey}&sport=soccer_epl&region=uk&mkt=h2h`;
-        const oddsRequestLeagueTwo = `https://api.the-odds-api.com/v3/odds/?apiKey=${oddsApiKey}&sport=soccer_england_league2&region=uk&mkt=h2h`        
+        const oddsRequestLeagueTwo = `https://api.the-odds-api.com/v3/odds/?apiKey=${oddsApiKey2}&sport=soccer_england_league2&region=uk&mkt=h2h`        
 
         Request.get(oddsRequestLeagueTwo).then((response) => {
             const oddsArray = response.body;

@@ -4,7 +4,6 @@ import {kMaxLength} from 'buffer';
 class DreamersSelection extends React.Component {
 
     render() {
-        console.log(this.props)
         const {homeTeam, awayTeam, oddsAway, oddsDraw, oddsHome, oddsAwayDiff, oddsDrawDiff, oddsHomeDiff} = this.props.selection;
         let sitch;
         let odds;
