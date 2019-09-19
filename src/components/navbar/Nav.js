@@ -18,7 +18,7 @@ class Nav extends React.Component {
                 </div>
                 <div className="item">
                     <Link to="/one">
-                        <div className="nav-division">league 1</div>
+                        <div className="nav-division">League 1</div>
                     </Link>
                 </div>
                 <div className="item">

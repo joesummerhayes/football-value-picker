@@ -1,5 +1,6 @@
 export function getGameObject(oddsObj, statsObj) {
 
+
     const teamsArray = oddsObj.teams;
     let gameObj = {
         teamNameHome: '',
@@ -53,9 +54,17 @@ export function getGameObject(oddsObj, statsObj) {
     const drawProb = drawProbRaw/probTotal * 100;
     const awayProb = awayProbRaw/probTotal * 100;
 
-    gameObj.predictionOddsHome = parseFloat((100/homeProb).toFixed(2));
-    gameObj.predictionOddsDraw = parseFloat((100/drawProb).toFixed(2));
-    gameObj.predictionOddsAway = parseFloat((100/awayProb).toFixed(2));
+     console.log(homeProb.toFixed(2))
+    if (homeProb.toFixed(2) == 33.33 && awayProb.toFixed(2) == 33.33 && drawProb.toFixed(2) == 33.33) {
+        console.log('HIT', oddsObj.home_team)
+        gameObj.predictionOddsHome = 'n/a';
+        gameObj.predictionOddsDraw = 'n/a';
+        gameObj.predictionOddsAway = 'n/a';
+    } else {
+        gameObj.predictionOddsHome = parseFloat((100/homeProb).toFixed(2));
+        gameObj.predictionOddsDraw = parseFloat((100/drawProb).toFixed(2));
+        gameObj.predictionOddsAway = parseFloat((100/awayProb).toFixed(2));
+    }
 
 
     //get the value between my odds and bookies odds

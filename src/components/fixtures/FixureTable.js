@@ -19,10 +19,6 @@ class FixtureTable extends Component {
 
 
 
-
-
-
-
 //////////////////////////////////////////////////////////////////////////////////////////
     renderOdds = () => {
         const fixturesArray = this.props.fixturesArray;
@@ -47,15 +43,15 @@ class FixtureTable extends Component {
             fixturesArray.find(fixture => {
                 if (game.home_team.includes(fixture.match_hometeam_name)) {
                     singleGameObj = getGameObject(game, fixture);
-                    fixtureArray.push(singleGameObj);
+                    if (singleGameObj.predictionOddsHome !== 'n/a') fixtureArray.push(singleGameObj); 
 
                     } else if (game.home_team.includes(fixture.match_hometeam_name.substring(0,12))) {
                         singleGameObj = getGameObject(game, fixture);
-                        fixtureArray.push(singleGameObj);
+                        if (singleGameObj.predictionOddsHome !== 'n/a') fixtureArray.push(singleGameObj);  
 
                     } else if (game.home_team.includes(fixture.match_hometeam_name.substring(0,4))) {
                         singleGameObj = getGameObject(game, fixture);
-                        fixtureArray.push(singleGameObj);
+                        if (singleGameObj.predictionOddsHome !== 'n/a') fixtureArray.push(singleGameObj); 
                     }
             })
         })
