@@ -18,3 +18,12 @@ export function findProfit(result, oddsDiff, moneyWin) {
         return oddsDiff.away > 0 ? `£${moneyWin.away}`: ''
     }
 };
+
+export function getDreamersBet(fixtureArray) {
+    return fixtureArray.reduce((highest, curr) => {
+        console.log('reduce hit', 'last max', highest.dreamerBet, 'current', curr.dreamerBet)
+        return curr.dreamerBet > highest.dreamerBet
+            ? curr
+            : highest;
+    })
+}

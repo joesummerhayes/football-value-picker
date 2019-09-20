@@ -17,13 +17,21 @@ class PremData extends React.Component {
         //change to 2 weeks
         const toDate = new Date(toDateUnix).toISOString().slice(0, 10);
 
-        const statsApiKey = '7af2d7e9641bd0322a09b5d94e4c03dd81da28e216f60929aa790d6236ed5e30';
-        const statsApiKey2 = '3939c49147beb8182e936aa4f6de908a14d6c6ceb3b2bc52a5493988e90d8c1c';
+        //get Stats variables
+        const statsApiKey = '7af2d7e9641bd0322a09b5d94e4c03dd81da28e216f60929aa790d6236ed5e30'; 
+        const statsApiKey2 = '970dd30b89c17b36e62fa91030d13628873c84d6b35971b2fff92df82e2f11ee'; 
         const fixtureRequest =
         `https://apiv2.apifootball.com/?action=get_predictions&from=${fromDate}&to=${toDate}&league_id=148&APIkey=${statsApiKey2}`;
 
+        //get odds variable
+        const oddsApiKey = '2c6b7d182fa278280c13e5e5a562ea1a';
+        const oddsApiKey2 = 'e89aafa4faef377c025d330a58c46bc9';
+        const oddsRequest = `https://api.the-odds-api.com/v3/odds/?apiKey=${oddsApiKey}&sport=soccer_epl&region=uk&mkt=h2h`;
+        const oddsRequestPrem = `https://api.the-odds-api.com/v3/odds/?apiKey=${oddsApiKey2}&sport=soccer_epl&region=uk&mkt=h2h`;
+
         Request.get(fixtureRequest).then((response) =>{
             const fixtureArray = response.body;
+            console.log(fixtureArray);
 
         //make sure fixture array is matchweek fixtures only
             const spliceFrom = 10;
@@ -33,21 +41,16 @@ class PremData extends React.Component {
             this.setState({
                 fixtures: fixtureArray
             });
-        });
-
-        const oddsApiKey = '2c6b7d182fa278280c13e5e5a562ea1a';
-        const oddsApiKey2 = 'e89aafa4faef377c025d330a58c46bc9';
-        const oddsRequest = `https://api.the-odds-api.com/v3/odds/?apiKey=${oddsApiKey2}&sport=soccer_epl&region=uk&mkt=h2h`;
-        const oddsRequestPrem = `https://api.the-odds-api.com/v3/odds/?apiKey=${oddsApiKey2}&sport=soccer_epl&region=uk&mkt=h2h`;
-        
-        Request.get(oddsRequestPrem).then((response) => {
-            const oddsArray = response.body;
-
-            this.setState({
-                odds: oddsArray.data
-            });
+        }).then(() => {
+            Request.get(oddsRequestPrem).then((response) => {
+                const oddsArray = response.body;
+                oddsArray.length ? console.log(oddsArray) : console.log('error in getting odds data')
+    
+                this.setState({
+                    odds: oddsArray.data
+                });
+            })
         })
-
 
     }
 
