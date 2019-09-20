@@ -3,10 +3,9 @@ import './FixtureTable.css';
 import {getDreamersBet} from './fixtureTableHelpers';
 import SingleFixture from '../SingleFixture';
 import {getGameObject} from './GetGameObjects';
-import {get} from 'http';
+import DreamersSelection from '../DreamerSelection/DreamersSelection';
 
 class FixtureTable extends Component {
-    state={};
 
 //////////////////////////////////////////////////////////////////////////////////////////
     renderOdds = () => {
@@ -48,8 +47,6 @@ class FixtureTable extends Component {
          if (fixtureArray.length) {
             dreamersBet = getDreamersBet(fixtureArray)
         }
-
-        console.log(dreamersBet);
        
 
 
@@ -57,6 +54,7 @@ class FixtureTable extends Component {
 
         return (
             <div>
+                {dreamersBet ? <DreamersSelection gameObj={dreamersBet} /> : ''}
             <table className="ui celled table">
                 <thead>
                     <tr>
@@ -82,8 +80,6 @@ class FixtureTable extends Component {
     render() {
         return (
             <div>
-                {this.state.teamNameHome}
-                {/* {this.props.fixturesArray.error !== 404 ? this.renderFixtures() : 'no content until a week before match day'} */}
                 {this.renderOdds()}
             </div>
         )
