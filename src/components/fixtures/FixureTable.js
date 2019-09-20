@@ -4,6 +4,7 @@ import {getDreamersBet} from './fixtureTableHelpers';
 import SingleFixture from '../SingleFixture';
 import {getGameObject} from './GetGameObjects';
 import DreamersSelection from '../DreamerSelection/DreamersSelection';
+import Loader from 'react-loader-spinner'
 
 class FixtureTable extends Component {
 
@@ -80,7 +81,19 @@ class FixtureTable extends Component {
     render() {
         return (
             <div>
-                {this.renderOdds()}
+                {this.props.oddsArray.length
+                ? this.renderOdds()
+                :
+                <div style={{margin: "auto", width:"11%", paddingTop:"200px"}}>
+                    <Loader
+                        type="TailSpin"
+                        color="#1FA104"
+                        height={200}
+                        width={200}
+                        timeout={3000} //3 secs
+                    />
+                </div>
+                }
             </div>
         )
     }
