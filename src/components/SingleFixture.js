@@ -4,7 +4,6 @@ import {findOddsValue, findProfit} from './fixtures/fixtureTableHelpers';
 class SingleFixture extends React.Component {
     render() {
         const gameInfo = this.props.gameInfo;
-        console.log(gameInfo)
 
         const oddsDiff = {
             home: gameInfo.valueHome,

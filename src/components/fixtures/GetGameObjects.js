@@ -15,6 +15,7 @@ export function getGameObject(oddsObj, statsObj) {
         valueDraw: '',
         valueAway: '',
         matchId:'',
+        dreamerBet: '',
     }
 
     teamsArray.map((team => {
@@ -54,9 +55,7 @@ export function getGameObject(oddsObj, statsObj) {
     const drawProb = drawProbRaw/probTotal * 100;
     const awayProb = awayProbRaw/probTotal * 100;
 
-     console.log(homeProb.toFixed(2))
     if (homeProb.toFixed(2) == 33.33 && awayProb.toFixed(2) == 33.33 && drawProb.toFixed(2) == 33.33) {
-        console.log('HIT', oddsObj.home_team)
         gameObj.predictionOddsHome = 'n/a';
         gameObj.predictionOddsDraw = 'n/a';
         gameObj.predictionOddsAway = 'n/a';
@@ -72,9 +71,14 @@ export function getGameObject(oddsObj, statsObj) {
     gameObj.valueDraw = parseFloat((gameObj.bookieOddsDraw - gameObj.predictionOddsDraw).toFixed(2));
     gameObj.valueAway = parseFloat((gameObj.bookieOddsAway - gameObj.predictionOddsAway).toFixed(2));
 
+    //get dreamersBet value
+    const valueArray = [gameObj.valueHome, gameObj.valueDraw, gameObj.valueAway];
+    gameObj.dreamerBet = valueArray.reduce((acc, val) => {
+        return val > acc ? acc = val : acc;
+    }, 0);
+
     //get Match id to pass as key
     gameObj.matchId = statsObj.match_id;
-
 
 
 
