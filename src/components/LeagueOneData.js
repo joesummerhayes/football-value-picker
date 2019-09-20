@@ -25,7 +25,8 @@ class LeagueOneData extends React.Component {
         //get odds varibles
         const oddsApiKey = '2c6b7d182fa278280c13e5e5a562ea1a';
         const oddsApiKey2 = 'e89aafa4faef377c025d330a58c46bc9';
-        const oddsRequestLeagueOne = `https://api.the-odds-api.com/v3/odds/?apiKey=${oddsApiKey2}&sport=soccer_england_league1&region=uk&mkt=h2h`
+        const oddsApiKey3 = '9bc928197f2353ae5df608681efb54b1';
+        const oddsRequestLeagueOne = `https://api.the-odds-api.com/v3/odds/?apiKey=${oddsApiKey3}&sport=soccer_england_league1&region=uk&mkt=h2h`
         
 
         Request.get(leagueOneFixtureRequest).then((response) =>{
