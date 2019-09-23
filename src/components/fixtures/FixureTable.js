@@ -55,7 +55,10 @@ class FixtureTable extends Component {
 
         return (
             <div>
-                {dreamersBet ? <DreamersSelection gameObj={dreamersBet} /> : ''}
+            <div className="row ui cards">
+                    {dreamersBet ? <DreamersSelection gameObj={dreamersBet} bet/> : ''}
+                    {dreamersBet ? <DreamersSelection gameObj={dreamersBet} layBet /> : ''}
+            </div>
             <table className="ui celled table">
                 <thead>
                     <tr>
