@@ -44,9 +44,11 @@ class DreamersSelection extends React.Component {
                             {statement}
                             </div>
                             <div className="extra content">
-                                <div className="ui basic green button">
-                                    Odds: {price}
-                                </div>
+                                <a href="https://www.betfair.com/exchange/plus/football/competition/10932509" target="none">
+                                    <div className="ui basic green button">
+                                        Odds: {price}
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     </div>
