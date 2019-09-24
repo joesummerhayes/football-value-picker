@@ -43,7 +43,7 @@ class DreamersSelection extends React.Component {
                 <div className="extra content">
                     <a href="https://www.betfair.com/exchange/plus/football/competition/10932509" target="none">
                         <div className="ui basic green button">
-                            Odds: {price}
+                            Bet Odds: {price}
                         </div>
                     </a>
                 </div>
@@ -52,8 +52,35 @@ class DreamersSelection extends React.Component {
         }
 
         this.renderLaybet = () => {
+            if (valueArray[0] < valueArray[1] && valueArray[0] < valueArray[2]) {
+                statement = `${gameObj.teamNameHome} to beat ${gameObj.teamNameAway} at away`;
+                price = gameObj.bookieOddsHome;
+                value = gameObj.valueHome;
+            } else if (valueArray[1] < valueArray[0] && valueArray[1] < valueArray[2]) {
+                statement = `${gameObj.teamNameHome} to draw with ${gameObj.teamNameAway}`;
+                price = gameObj.bookieOddsDraw;
+                value = gameObj.valueDraw;
+            } else if (valueArray[2] < valueArray[0] && valueArray[2] < valueArray[1]) {
+                statement = `${gameObj.teamNameAway} to beat ${gameObj.teamNameHome} at home`;
+                price = gameObj.bookieOddsAway;
+                value = gameObj.valueAway;
+            }
             return (
-                <div>this is my lay bet</div>
+                <div className="content">
+                    <div className="header">
+                        Dreamers Lay Bet
+                    </div>
+                    <div className="description">
+                    {statement}
+                    </div>
+                    <div className="extra content">
+                        <a href="https://www.betfair.com/exchange/plus/football/competition/10932509" target="none">
+                            <div className="ui basic red button">
+                                Lay Odds: {price}
+                            </div>
+                        </a>
+                    </div>
+                </div>
             )
         }
 
