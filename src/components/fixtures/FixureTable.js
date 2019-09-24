@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './FixtureTable.css';
-import {getDreamersBet} from './fixtureTableHelpers';
+import {getDreamersBet, getDreamersLay} from './fixtureTableHelpers';
 import SingleFixture from '../SingleFixture';
 import {getGameObject} from './GetGameObjects';
 import DreamersSelection from '../DreamerSelection/DreamersSelection';
@@ -27,6 +27,7 @@ class FixtureTable extends Component {
         let fixtureArray = [];
         let singleGameObj = {};
         let dreamersBet = {};
+        let dreamersLay = {};
 
         oddsArray.map(game => {
 
@@ -46,8 +47,10 @@ class FixtureTable extends Component {
             })
         })
          if (fixtureArray.length) {
-            dreamersBet = getDreamersBet(fixtureArray)
+            dreamersBet = getDreamersBet(fixtureArray);
+            dreamersLay = getDreamersLay(fixtureArray);
         }
+        
        
 
 
@@ -55,7 +58,10 @@ class FixtureTable extends Component {
 
         return (
             <div>
-                {dreamersBet ? <DreamersSelection gameObj={dreamersBet} /> : ''}
+            <div className="row ui cards">
+                    {dreamersBet ? <DreamersSelection gameObj={dreamersBet} bet/> : ''}
+                    {dreamersLay ? <DreamersSelection gameObj={dreamersLay} layBet /> : ''}
+            </div>
             <table className="ui celled table">
                 <thead>
                     <tr>

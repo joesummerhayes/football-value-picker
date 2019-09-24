@@ -12,7 +12,7 @@ class DreamersSelection extends React.Component {
         let value;
 
 
-        this.renderContent = () => {
+        this.renderDreamersBet = () => {
             if (valueArray[0] > valueArray[1] && valueArray[0] > valueArray[2]) { //home
                 statement = `${gameObj.teamNameHome} to beat ${gameObj.teamNameAway} at home`;
                 price = gameObj.bookieOddsHome;
@@ -33,30 +33,59 @@ class DreamersSelection extends React.Component {
     
     
             return (
-                <div className="dreamer-card">
-                <div className="ui cards">
-                    <div className="card">
-                        <div className="content">
-                            <div className="header">
-                                Dreamers Selection
-                            </div>
-                            <div className="description">
-                            {statement}
-                            </div>
-                            <div className="extra content">
-                                <div className="ui basic green button">
-                                    Odds: {price}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div className="content">
+                <div className="header">
+                    Dreamers Selection
                 </div>
+                <div className="description">
+                {statement}
+                </div>
+                <div className="extra content">
+                    <a href="https://www.betfair.com/exchange/plus/football/competition/10932509" target="none">
+                        <div className="ui basic green button">
+                            Bet Odds: {price}
+                        </div>
+                    </a>
+                </div>
+            </div>
+            )       
+        }
+
+        this.renderLaybet = () => {
+            if (valueArray[0] < valueArray[1] && valueArray[0] < valueArray[2]) {
+                statement = `${gameObj.teamNameHome} to beat ${gameObj.teamNameAway} at away`;
+                price = gameObj.bookieOddsHome;
+                value = gameObj.valueHome;
+            } else if (valueArray[1] < valueArray[0] && valueArray[1] < valueArray[2]) {
+                statement = `${gameObj.teamNameHome} to draw with ${gameObj.teamNameAway}`;
+                price = gameObj.bookieOddsDraw;
+                value = gameObj.valueDraw;
+            } else if (valueArray[2] < valueArray[0] && valueArray[2] < valueArray[1]) {
+                statement = `${gameObj.teamNameAway} to beat ${gameObj.teamNameHome} at home`;
+                price = gameObj.bookieOddsAway;
+                value = gameObj.valueAway;
+            }
+            return (
+                <div className="content">
+                    <div className="header">
+                        Dreamers Lay Bet
+                    </div>
+                    <div className="description">
+                    {statement}
+                    </div>
+                    <div className="extra content">
+                        <a href="https://www.betfair.com/exchange/plus/football/competition/10932509" target="none">
+                            <div className="ui basic red button">
+                                Lay Odds: {price}
+                            </div>
+                        </a>
+                    </div>
                 </div>
             )
         }
 
         return (
-            <div>{gameObj.teamNameHome ? this.renderContent() : ''}</div>
+            <div className="card">{this.props.bet ? this.renderDreamersBet() : this.renderLaybet()}</div>
         )
 
     }

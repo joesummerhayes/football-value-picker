@@ -24,5 +24,13 @@ export function getDreamersBet(fixtureArray) {
         return curr.dreamerBet > highest.dreamerBet
             ? curr
             : highest;
+    });
+};
+
+export function getDreamersLay(fixtureArray) {
+    return fixtureArray.reduce((lowest, curr) => {
+        return curr.dreamersLay < lowest.dreamersLay
+            ? curr
+            : lowest;
     })
-}
+};

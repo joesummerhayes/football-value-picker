@@ -16,6 +16,7 @@ export function getGameObject(oddsObj, statsObj) {
         valueAway: '',
         matchId:'',
         dreamerBet: '',
+        dreamersLay: '',
     }
 
     teamsArray.map((team => {
@@ -73,8 +74,14 @@ export function getGameObject(oddsObj, statsObj) {
 
     //get dreamersBet value
     const valueArray = [gameObj.valueHome, gameObj.valueDraw, gameObj.valueAway];
+
     gameObj.dreamerBet = valueArray.reduce((acc, val) => {
         return val > acc ? acc = val : acc;
+    }, 0);
+
+    //get dreamersLay value
+    gameObj.dreamersLay = valueArray.reduce((lowest, curr) => {
+        return curr < lowest ? lowest = curr : lowest;
     }, 0);
 
     //get Match id to pass as key
