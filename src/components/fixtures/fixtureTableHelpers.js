@@ -27,8 +27,28 @@ export function getDreamersBet(fixtureArray) {
     });
 };
 
+function layBetHelper(type, gameObj) {
+
+    console.log(gameObj[type])
+    if (gameObj[type] < 4 && gameObj.dreamersLay < -1) {
+        console.log('1111', gameObj)
+    }
+}
+
 export function getDreamersLay(fixtureArray) {
     return fixtureArray.reduce((lowest, curr) => {
+
+        if (curr.dreamersLayType === 'home') {
+            const type = 'bookieOddsHome';
+            layBetHelper(type, curr)
+        } else if (curr.dreamersLayType === 'draw') {
+            const type = 'bookieOddsDraw';
+            layBetHelper(type, curr);
+        } else {
+            const type = 'bookieOddsAway';
+            layBetHelper(type, curr);
+        }
+
         return curr.dreamersLay < lowest.dreamersLay
             ? curr
             : lowest;

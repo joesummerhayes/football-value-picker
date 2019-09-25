@@ -5,7 +5,6 @@ class DreamersSelection extends React.Component {
 
     render() {
         const gameObj = this.props.gameObj;
-        console.log(gameObj)
         const valueArray = [gameObj.valueHome, gameObj.valueDraw, gameObj.valueAway];
         let statement;
         let price;
