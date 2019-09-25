@@ -17,6 +17,7 @@ export function getGameObject(oddsObj, statsObj) {
         matchId:'',
         dreamerBet: '',
         dreamersLay: '',
+        dreamersLayType: '',
     }
 
     teamsArray.map((team => {
@@ -83,6 +84,14 @@ export function getGameObject(oddsObj, statsObj) {
     gameObj.dreamersLay = valueArray.reduce((lowest, curr) => {
         return curr < lowest ? lowest = curr : lowest;
     }, 0);
+
+    //get laybet Type (home/draw/away)
+    if (gameObj.dreamersLay === gameObj.valueHome) {
+        gameObj.dreamersLayType = 'home';
+    } else if (gameObj.dreamersLay === gameObj.valueDraw) {
+        gameObj.dreamersLayType = 'draw'
+    } else {gameObj.dreamersLayType = 'away'}
+    
 
     //get Match id to pass as key
     gameObj.matchId = statsObj.match_id;

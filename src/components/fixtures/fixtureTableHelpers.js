@@ -28,9 +28,17 @@ export function getDreamersBet(fixtureArray) {
 };
 
 export function getDreamersLay(fixtureArray) {
+
     return fixtureArray.reduce((lowest, curr) => {
-        return curr.dreamersLay < lowest.dreamersLay
+        let price;
+        if (curr.dreamersLayType === 'home') {
+            price = curr.bookieOddsHome;
+        } else if (curr.dreamersLayType === 'draw') {
+            price = curr.bookieOddsDraw;
+        } else {price = curr.bookieOddsAway;}
+
+        return price < 6 && curr.dreamersLay < lowest.dreamersLay
             ? curr
             : lowest;
-    })
+    });
 };
