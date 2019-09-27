@@ -32,21 +32,25 @@ class DreamersSelection extends React.Component {
     
     
             return (
-            <div className="content">
-                <div className="header">
-                    Dreamers Selection
-                </div>
-                <div className="description">
-                {statement}
-                </div>
-                <div className="extra content">
-                    <a href="https://www.betfair.com/exchange/plus/football/competition/10932509" target="none">
-                        <div className="ui basic green button">
-                            Bet Odds: {price}
+                <div className="dreamer-card bet">
+                    <div className="card dreamers-bet">
+                        <div className="content">
+                            <h3 className="header">
+                                Dreamers Bet
+                            </h3>
+                            <div className="description">
+                            {statement}
+                            </div>
+                            <div className="extra content">
+                                <a href="https://www.betfair.com/exchange/plus/football/competition/10932509" target="none">
+                                    <div className="ui basic green button">
+                                        Bet Odds: {price}
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
-            </div>
             )       
         }
 
@@ -65,26 +69,30 @@ class DreamersSelection extends React.Component {
                 value = gameObj.valueAway;
             }
             return (
-                <div className="content">
-                    <div className="header">
-                        Dreamers Lay Bet
-                    </div>
-                    <div className="description">
-                    {statement}
-                    </div>
-                    <div className="extra content">
-                        <a href="https://www.betfair.com/exchange/plus/football/competition/10932509" target="none">
-                            <div className="ui basic red button">
-                                Lay Odds: {price}
+                <div className="dreamer-card lay">
+                    <div className="card dreamers-lay">
+                        <div className="content">
+                            <h3 className="header">
+                                Dreamers Lay
+                            </h3>
+                            <div className="description">
+                            {statement}
                             </div>
-                        </a>
+                            <div className="extra content">
+                                <a href="https://www.betfair.com/exchange/plus/football/competition/10932509" target="none">
+                                    <div className="ui negative basic button">
+                                        Lay Odds: {price}
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )
         }
 
         return (
-            <div className="card">{this.props.bet ? this.renderDreamersBet() : this.renderLaybet()}</div>
+            <>{this.props.bet ? this.renderDreamersBet() : this.renderLaybet()}</>
         )
 
     }
