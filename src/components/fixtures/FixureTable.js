@@ -58,7 +58,7 @@ class FixtureTable extends Component {
 
         return (
             <div>
-            <div className="row ui cards">
+            <div className="row ui cards" style={{width: "100%", textAlign:"center"}}>
                     {dreamersBet ? <DreamersSelection gameObj={dreamersBet} bet/> : ''}
                     {dreamersLay ? <DreamersSelection gameObj={dreamersLay} layBet /> : ''}
             </div>

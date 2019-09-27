@@ -1,4 +1,30 @@
+
 .dreamer-card {
-    margin: auto;
-    width: 20%;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    padding: 20px;
+    flex: auto;
 }
+
+.lay {
+    border: 1px solid red;
+    background: #F1B8B8;
+    margin: 2% 1% 2% 0.5%;
+}
+
+.bet{
+    border: 1px solid green;
+    background: #BCF3BF;
+    margin: 2% 0.5% 2% 1%;
+}
+
+.content {
+    padding-top: 1rem;
+}
+
+.ui.cards {
+    margin: 0!important;
+}
+
+
