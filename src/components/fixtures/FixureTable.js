@@ -13,15 +13,17 @@ class FixtureTable extends Component {
         const fixturesArray = this.props.fixturesArray;
         const oddsArray = this.props.oddsArray;
 
-    
+        const liveFixturesArray = 
+        fixturesArray.filter((game) => {
+            if (game.match_live === "0") {
+                return game
+            }
+        });
 
-
-        const oddsSpliceFrom = fixturesArray.length;
+        const oddsSpliceFrom = liveFixturesArray.length;
         const oddsSpliceTo = oddsArray.length;
 
-
         oddsArray.splice(oddsSpliceFrom, oddsSpliceTo);
-
 
         // fixture array has all the gameObjects in
         let fixtureArray = [];
@@ -31,7 +33,7 @@ class FixtureTable extends Component {
 
         oddsArray.map(game => {
 
-            fixturesArray.find(fixture => {
+            liveFixturesArray.find(fixture => {
                 if (game.home_team.includes(fixture.match_hometeam_name)) {
                     singleGameObj = getGameObject(game, fixture);
                     if (singleGameObj.predictionOddsHome !== 'n/a') fixtureArray.push(singleGameObj);
@@ -58,7 +60,7 @@ class FixtureTable extends Component {
 
         return (
             <div>
-            <div className="row ui cards" style={{width: "100%", textAlign:"center"}}>
+            <div className="row ui cards test" style={{width: "100%", textAlign:"center"}}>
                     {dreamersBet ? <DreamersSelection gameObj={dreamersBet} bet/> : ''}
                     {dreamersLay ? <DreamersSelection gameObj={dreamersLay} layBet /> : ''}
             </div>
