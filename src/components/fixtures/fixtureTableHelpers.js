@@ -1,11 +1,21 @@
 
 export function findOddsValue(result, oddsDiff) {
+    function getClass(result) {
+        return oddsDiff[result] > 2 ? "oddsSuperValue"
+        : oddsDiff[result] > 1 ? "oddsHighValue"
+        : oddsDiff[result] > 0.2 ? "oddsValue"
+        : oddsDiff[result] < -5.5 ? "laySuperValue"
+        : oddsDiff[result] < -1.5 ? "layHighValue"
+        : oddsDiff[result] < -0.5 ? "layValue"
+        : '';
+    };
+
     if (result === 'home') {
-        return oddsDiff.home > 2 ? "oddsSuperValue" : oddsDiff.home > 1 ? "oddsHighValue" : oddsDiff.home > 0.2 ? "oddsValue" : '';
+        return getClass('home')
      } else if (result === 'draw') {
-         return oddsDiff.draw > 2 ? "oddsSuperValue" : oddsDiff.draw > 1 ? "oddsHighValue" : oddsDiff.draw > 0.2 ? "oddsValue" : ''
+         return getClass('draw')
      } else if (result === 'away') {
-         return oddsDiff.away > 2 ? "oddsSuperValue" : oddsDiff.away > 1 ? "oddsHighValue" : oddsDiff.away > 0.2 ? "oddsValue" : ''
+         return getClass('away')
      }
 };
 
