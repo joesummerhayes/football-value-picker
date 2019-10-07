@@ -19,7 +19,7 @@ class PremData extends React.Component {
 
         //get Stats variables
         const statsApiKey = '7af2d7e9641bd0322a09b5d94e4c03dd81da28e216f60929aa790d6236ed5e30'; 
-        const statsApiKey2 = '970dd30b89c17b36e62fa91030d13628873c84d6b35971b2fff92df82e2f11ee'; 
+        const statsApiKey2 = '115f30cadf94cb0d09489d98fe616d22f3cbbf1107dcf63c1f80e311e10da85d'; 
         const fixtureRequest =
         `https://apiv2.apifootball.com/?action=get_predictions&from=${fromDate}&to=${toDate}&league_id=148&APIkey=${statsApiKey2}`;
 
@@ -37,7 +37,9 @@ class PremData extends React.Component {
         //make sure fixture array is matchweek fixtures only
             const spliceFrom = 10;
             const spliceTo = fixtureArray.length;
-            fixtureArray.splice(spliceFrom, spliceTo);
+            if (fixtureArray.length) {
+                fixtureArray.splice(spliceFrom, spliceTo);
+            }
 
             this.setState({
                 fixtures: fixtureArray
