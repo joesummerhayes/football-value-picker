@@ -7,7 +7,7 @@ class Nav extends React.Component {
         return (
             <div className="ui four item menu">
                 <div className="item">
-                    <Link to="/">
+                    <Link to="/prem">
                         <div className="nav-division">Premiership</div>
                     </Link>
                 </div>
