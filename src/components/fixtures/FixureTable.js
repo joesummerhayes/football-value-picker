@@ -14,11 +14,11 @@ class FixtureTable extends Component {
         const oddsArray = this.props.oddsArray;
 
         const liveFixturesArray = 
-        fixturesArray.filter((game) => {
+        fixturesArray.length ? fixturesArray.filter((game) => {
             if (game.match_live === "0") {
                 return game
             }
-        });
+        }) : [];
 
         const oddsSpliceFrom = liveFixturesArray.length;
         const oddsSpliceTo = oddsArray.length;
