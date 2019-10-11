@@ -10,7 +10,7 @@ class NoFixtures extends React.Component {
                     <img src={photo} style={{width: "-webkit-fill-available"}} />
                 </div>
                 <div className="no-fixture-content">
-                    Seems there are no fixtures this gameweek, buggar.
+                    Seems there are no fixtures this gameweek, bugger.
                 </div>
             </div>
         )
