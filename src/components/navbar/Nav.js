@@ -5,7 +5,7 @@ import './nav.css'
 class Nav extends React.Component {
     render() {
         return (
-            <div className="ui four item menu">
+            <div className="ui four item menu nav-menu">
                 <div className="item">
                     <Link to="/prem">
                         <div className="nav-division">Premiership</div>

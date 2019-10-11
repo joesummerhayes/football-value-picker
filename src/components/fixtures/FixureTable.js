@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './FixtureTable.css';
 import {getDreamersBet, getDreamersLay} from './fixtureTableHelpers';
 import SingleFixture from '../SingleFixture';
+import NoFixtures from './NoFixtures'
 import {getGameObject} from './GetGameObjects';
 import DreamersSelection from '../DreamerSelection/DreamersSelection';
 import Loader from 'react-loader-spinner'
@@ -57,33 +58,34 @@ class FixtureTable extends Component {
 
 
 
-
-        return (
-            <div>
-            <div className="row ui cards test" style={{width: "100%", textAlign:"center"}}>
-                    {dreamersBet ? <DreamersSelection gameObj={dreamersBet} bet/> : ''}
-                    {dreamersLay ? <DreamersSelection gameObj={dreamersLay} layBet /> : ''}
+        if (fixtureArray.length) {
+            return (
+                <div>
+                <div className="row ui cards test" style={{width: "100%", textAlign:"center"}}>
+                        {dreamersBet ? <DreamersSelection gameObj={dreamersBet} bet/> : ''}
+                        {dreamersLay ? <DreamersSelection gameObj={dreamersLay} layBet /> : ''}
+                </div>
+                <table className="ui celled table">
+                    <thead>
+                        <tr>
+                            <th>Fixture</th>
+                            <th>Home</th>
+                            <th>Draw</th>
+                            <th>Away</th>
+                            <th>Betfair home</th>
+                            <th>Betfair draw</th>
+                            <th>Betfair away</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            {fixtureArray.map(game => {
+                                return <SingleFixture key={game.matchId} gameInfo={game} />
+                            })}
+                    </tbody>
+                </table>
             </div>
-            <table className="ui celled table">
-                <thead>
-                    <tr>
-                        <th>Fixture</th>
-                        <th>Home</th>
-                        <th>Draw</th>
-                        <th>Away</th>
-                        <th>Betfair home</th>
-                        <th>Betfair draw</th>
-                        <th>Betfair away</th>
-                    </tr>
-                </thead>
-                <tbody>
-                        {fixtureArray.map(game => {
-                            return <SingleFixture key={game.matchId} gameInfo={game} />
-                        })}
-                </tbody>
-            </table>
-        </div>
-        )
+            )
+        } else return <NoFixtures />
     }
 
     render() {
