@@ -16,3 +16,48 @@
 .nav-menu {
     margin: 0 !important;
 }
+
+@media only screen and (max-width: 800px) {
+    .nav-menu {
+        display: none !important; 
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    .burger {
+        display: none;
+    }
+    .nav-mobile {
+        display: none;
+    }
+}
+
+.nav-mobile {
+    position: fixed;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-color: white;
+    border-right: 5px solid black;
+    z-index: 1;
+    transition: all 0.3s ease-in-out;
+}
+.nav-mobile li {
+    list-style-type: none;
+    padding: 4rem 0 4rem 1rem;
+    text-transform: uppercase;
+
+}
+
+.nav-mobile .sidebar-link:hover {
+    background-color: #BCF3BF;
+}
+
+
+.burger .item {
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
