@@ -1,0 +1,24 @@
+.value-low {
+    color: rgb(226, 255, 226);
+}
+
+.value-med {
+    color: rgb(123, 235, 123);
+}
+
+.value-high {
+    color: rgb(31, 161, 4);
+}
+
+.lay-low {
+    color: #FAE8E8;
+}
+
+.lay-med {
+    color: #F6AEAE;
+}
+
+.lay-high {
+    color: #F67474;
+}
+
