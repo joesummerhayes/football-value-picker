@@ -21,3 +21,13 @@
 .laySuperValue {
     background-color: #F67474
 }
+
+.color-key {
+    border: 1px solid black;
+
+    vertical-align: top;
+    text-align: center;
+    padding: 20px;
+    flex: auto;
+    margin: 0% 1% 2% 1%;
+}

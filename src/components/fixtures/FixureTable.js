@@ -5,6 +5,7 @@ import SingleFixture from '../SingleFixture';
 import NoFixtures from './NoFixtures'
 import {getGameObject} from './GetGameObjects';
 import DreamersSelection from '../DreamerSelection/DreamersSelection';
+import Key from '../Key/Key';
 import Loader from 'react-loader-spinner'
 
 class FixtureTable extends Component {
@@ -64,6 +65,9 @@ class FixtureTable extends Component {
                 <div className="row ui cards test" style={{width: "100%", textAlign:"center"}}>
                         {dreamersBet ? <DreamersSelection gameObj={dreamersBet} bet/> : ''}
                         {dreamersLay ? <DreamersSelection gameObj={dreamersLay} layBet /> : ''}
+                </div>
+                <div className="color-key">
+                    <Key />
                 </div>
                 <table className="ui celled table">
                     <thead>

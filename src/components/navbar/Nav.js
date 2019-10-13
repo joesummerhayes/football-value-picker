@@ -37,7 +37,7 @@ class Nav extends React.Component {
                         <div className="ui one menu">
                             <div className="item">
                                     <div className="nav-division">
-                                    <i class={this.state.sideBar ? "angle double up icon" : "angle double down icon"}></i>
+                                    <i className={this.state.sideBar ? "angle double up icon" : "angle double down icon"}></i>
                                     </div>
                             </div>
                         </div>
