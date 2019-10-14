@@ -5,9 +5,21 @@ import './nav.css'
 
 class Nav extends React.Component {
     state = {
-        sideBar: false
+        sideBar: false,
+        isHovered: false
     }
+
+    handleHover = () => {
+        this.setState({
+            isHovered: !this.state.isHovered
+        })
+    }
+
     render() {
+
+        const btnClass = this.state.isHovered ? (this.state.sideBar ? "angle up icon" : "angle down icon") : "bars icon";
+ 
+
         return (
             <div>
                 <div className="ui four item menu nav-menu">
@@ -36,8 +48,8 @@ class Nav extends React.Component {
                     <div className="burger">
                         <div className="ui one menu">
                             <div className="item">
-                                    <div className="nav-division">
-                                    <i className={this.state.sideBar ? "angle double up icon" : "angle double down icon"}></i>
+                                    <div className="nav-division nav-icon">
+                                        <i className={btnClass} onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}></i>
                                     </div>
                             </div>
                         </div>
