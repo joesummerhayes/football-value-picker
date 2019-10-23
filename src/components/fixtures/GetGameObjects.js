@@ -97,6 +97,5 @@ export function getGameObject(oddsObj, statsObj) {
     gameObj.matchId = statsObj.match_id;
 
 
-
      return gameObj
 }
