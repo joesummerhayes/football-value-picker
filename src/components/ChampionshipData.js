@@ -18,7 +18,7 @@ class ChampionshipData extends React.Component {
 
         //get state variables
         const statsApiKey = '7af2d7e9641bd0322a09b5d94e4c03dd81da28e216f60929aa790d6236ed5e30';
-        const statsApiKey2 = '115f30cadf94cb0d09489d98fe616d22f3cbbf1107dcf63c1f80e311e10da85d';
+        const statsApiKey2 = '2ffddad698b7fb3d5441e83aedcf7cbb03e7e0e04249336f2e686543320a2d85';
         const fixtureRequest =
         `https://apiv2.apifootball.com/?action=get_predictions&from=${fromDate}&to=${toDate}&league_id=149&APIkey=${statsApiKey2}`;
 

@@ -8,6 +8,8 @@ import DreamersSelection from '../DreamerSelection/DreamersSelection';
 import Key from '../Key/Key';
 import Loader from 'react-loader-spinner'
 
+import { Popup } from 'semantic-ui-react'
+
 class FixtureTable extends Component {
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -72,13 +74,13 @@ class FixtureTable extends Component {
                 <table className="ui celled table">
                     <thead>
                         <tr>
-                            <th>Fixture</th>
-                            <th>Home</th>
-                            <th>Draw</th>
-                            <th>Away</th>
-                            <th>Betfair home</th>
-                            <th>Betfair draw</th>
-                            <th>Betfair away</th>
+                            <Popup content='Fixture List' trigger={<th>Fixture</th>} />
+                            <Popup content='Calculated odds for a home win' trigger={<th>Home</th>} />
+                            <Popup content='Calculated odds for a draw' trigger={<th>Draw</th>} />
+                            <Popup content='Calculated odds for an away win' trigger={<th>Away</th>} />
+                            <Popup content='Betfair exchanges currernt price and the +/- value' trigger={<th>Betfair Home</th>} />
+                            <Popup content='Betfair exchanges currernt price and the +/- value' trigger={<th>Betair Draw</th>} />
+                            <Popup content='Betfair exchanges currernt price and the +/- value' trigger={<th>Betfair Away</th>} />
                         </tr>
                     </thead>
                     <tbody>
