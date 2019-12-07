@@ -1,11 +1,14 @@
 import React from 'react';
 import photo from '../images/homeImg2.jpeg';
+import WebsiteInfo from './WebsiteInfo'
+import './homePage.css';
 
 class HomePage extends React.Component {
     render() {
         return (
             <div>
-                <img src={photo} style={{width: "-webkit-fill-available"}} />
+                <WebsiteInfo />
+                <img src={photo} className="home-hero" />
             </div>
         )
     }

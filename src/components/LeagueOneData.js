@@ -18,7 +18,7 @@ class LeagueOneData extends React.Component {
         const toDate = new Date(toDateUnix).toISOString().slice(0, 10);
 
         const statsApiKey = '7af2d7e9641bd0322a09b5d94e4c03dd81da28e216f60929aa790d6236ed5e30';
-        const statsApiKey2 = '2ffddad698b7fb3d5441e83aedcf7cbb03e7e0e04249336f2e686543320a2d85';
+        const statsApiKey2 = '6cc76dd1321daab09166a8d28b70ef19ec2b39e397d6498a017cf4c80aa3e949';
         const leagueOneFixtureRequest = 
         `https://apiv2.apifootball.com/?action=get_predictions&from=${fromDate}&to=${toDate}&league_id=150&APIkey=${statsApiKey2}`
 

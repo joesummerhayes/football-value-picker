@@ -1,0 +1,10 @@
+.home-hero {
+    position: fixed;
+    z-index: 1;
+}
+
+.home-info {
+    z-index: 999;
+    position: absolute;
+    left: 37%;
+}
